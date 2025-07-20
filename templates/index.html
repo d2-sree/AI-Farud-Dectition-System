@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fraud Detection System</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, #1e1e1e, #2e2e2e);
+      color: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #2c2c2c;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+      width: 400px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 30px;
+      color: #ffffff;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 5px;
+      text-align: left;
+      color: #dcdcdc;
+      font-size: 14px;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      background-color: #444;
+      color: #fff;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      margin-top: 25px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    h3 {
+      margin-top: 25px;
+      color: #00ffcc;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Fraud Detection - Input Transaction</h2>
+    <form action="/predict" method="post">
+      <label>Transaction Amount:</label>
+      <input type="number" name="TransactionAmount" step="0.01">
+
+      <label>Transaction Duration:</label>
+      <input type="number" name="TransactionDuration" step="0.01">
+
+      <label>Login Attempts:</label>
+      <input type="number" name="LoginAttempts">
+
+      <label>Customer Age:</label>
+      <input type="number" name="CustomerAge">
+
+      <label>Account Balance:</label>
+      <input type="number" name="AccountBalance" step="0.01">
+
+      <input type="submit" value="Predict">
+    </form>
+    <hr>
+<h3 style="text-align:center;">📊 Fraud Detection Dashboard</h3>
+<canvas id="fraudPie" width="300" height="300"></canvas>
+<canvas id="fraudBar" width="600" height="300" style="margin-top: 30px;"></canvas>
+   <!-- 🔗 Dashboard link placed right here -->
+    <a href="/dashboard" class="dashboard-link">📊 Go to Dashboard</a>
+    {% if prediction_text %}
+  <h3 style="margin-top: 20px; color: {{ 'red' if 'Fraud' in prediction_text else 'green' }};">
+    {{ prediction_text }}
+  </h3>
+{% endif %}
+
+
+  </div>
+</body>
+</html>
